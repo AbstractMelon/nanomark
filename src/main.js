@@ -45,11 +45,18 @@ class Nanomark {
     // Process tables
     html = this.processTables(html);
 
-    // Process paragraphs
-    html = html.replace(
-      this.patterns.paragraph,
-      (match) => `<p>${match.trim()}</p>`
-    );
+    // Process paragraphs for text blocks that aren't already wrapped
+    html = html.replace(this.patterns.paragraph, (match) => {
+      // Check if the match is already wrapped in a block-level tag
+      if (
+        /^(<h[1-6]|<ul|<ol|<li|<blockquote|<code|<pre|<table|<tr|<th|<td|<a|<strong|<em|<p)/.test(
+          match
+        )
+      ) {
+        return match; // Leave it untouched
+      }
+      return `<p>${match.trim()}</p>`;
+    });
 
     // Remove redundant newlines
     html = html.replace(/\n{2,}/g, "\n");
