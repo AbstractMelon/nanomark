@@ -1,0 +1,31 @@
+{
+  "name": "nanomark",
+  "version": "1.0.0",
+  "description": "Fast and simple markdown library!",
+  "keywords": [
+    "Markdown",
+    "Javascript",
+    "Fast"
+  ],
+  "homepage": "https://github.com/AbstractMelon/nanomark#readme",
+  "bugs": {
+    "url": "https://github.com/AbstractMelon/nanomark/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbstractMelon/nanomark.git"
+  },
+  "license": "ISC",
+  "author": "Abstractmelon",
+  "type": "commonjs",
+  "main": "src/main.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "node tests/test.js"
+  },
+  "dependencies": {
+    "nanomark": "file:nanomark-1.0.0.tgz"
+  }
+}
