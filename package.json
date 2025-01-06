@@ -1,6 +1,6 @@
 {
   "name": "nanomark",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Fast and simple markdown library!",
   "keywords": [
     "Markdown",
@@ -20,14 +20,17 @@
   "type": "commonjs",
   "main": "src/main.js",
   "directories": {
-    "test": "tests"
+    "lib": "src"
   },
   "scripts": {
     "test": "node tests/test.js"
   },
-  "dependencies": {
+  "files": [
+    "src/**/*"
+  ],
+  "devDependencies": {
     "marked": "^15.0.6",
-    "nanomark": "file:nanomark-1.0.0.tgz",
-    "showdown": "^2.1.0"
+    "showdown": "^2.1.0",
+    "nanomark": "file:nanomark-1.1.0.tgz"
   }
 }
