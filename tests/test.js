@@ -51,4 +51,7 @@ console.log(`Worst time: ${max}ms`);
 console.log(`Average time: ${avg}ms`);
 console.log(`Tests run: ${numTests}`);
 
-fs.writeFileSync("output.html", finalHtml);
+fs.writeFileSync(
+  "output.html",
+  `<link rel="stylesheet" href="test-style.css" />\n${finalHtml}`
+);

@@ -52,6 +52,11 @@ code block
 \`\`\`
 
 [Link text](https://example.com)
+
+| Foo | Bar | Baz |
+| 1   | 2   | 3   |
+| 4   | 5   | 6   |
+| 7   | 8   | 9   |
 `;
 
 const html = parser.parse(markdown);
