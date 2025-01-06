@@ -2,6 +2,8 @@
 
 **Nanomark** is a super-fast, lightweight Markdown-to-HTML parser. It supports common Markdown features and is designed for speed and simplicity.
 
+![Performance Chart](./assets/performance-chart.png)
+
 ## Features
 
 - **Headings**: Convert `# Heading` to `<h1>Heading</h1>`.

@@ -26,6 +26,8 @@
     "test": "node tests/test.js"
   },
   "dependencies": {
-    "nanomark": "file:nanomark-1.0.0.tgz"
+    "marked": "^15.0.6",
+    "nanomark": "file:nanomark-1.0.0.tgz",
+    "showdown": "^2.1.0"
   }
 }
