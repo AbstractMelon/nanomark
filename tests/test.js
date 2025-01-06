@@ -23,5 +23,8 @@ code block
 [Link text](https://example.com)
 `;
 
+const start = process.hrtime();
 const html = parser.parse(markdown);
+const end = process.hrtime(start);
+console.log(`Time taken to parse markdown: ${end[0]}s ${end[1] / 1000000}ms`);
 console.log(html);
