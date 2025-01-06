@@ -5,11 +5,12 @@ class Nanomark {
       bold: /\*\*(.+?)\*\*/g,
       italic: /\*(.+?)\*/g,
       link: /\[(.+?)\]\((.+?)\)/g,
-      listItem: /^([-*+]|\d+\.)\s+(.+)$/gm,
+      listItem: /^([-*+]|\d+\.)\s+(.+)$/gm,
       blockquote: /^>\s+(.+)$/gm,
       code: /`([^`]+)`/g,
       codeBlock: /```([\s\S]+?)```/g,
       paragraph: /^(?![-*+]|^\d+\.|>|#{1,6}\s|```)[^\n]+$/gm,
+      table: /^(?:\|(.+?)\|(?:\n|$))+$/gm,
     };
   }
 
@@ -41,6 +42,9 @@ class Nanomark {
     // Process lists (unordered and ordered)
     html = this.processLists(html);
 
+    // Process tables
+    html = this.processTables(html);
+
     // Process paragraphs
     html = html.replace(
       this.patterns.paragraph,
@@ -64,7 +68,7 @@ class Nanomark {
           .split("\n")
           .filter((item) => item.trim())
           .map((item) => {
-            const content = item.replace(/^([-*+]|\d+\.)\s+/, "");
+            const content = item.replace(/^([-*+]|\d+\.)\s+/, "");
             return `<li>${content.trim()}</li>`;
           })
           .join("");
@@ -72,6 +76,22 @@ class Nanomark {
         return `<${tag}>${items}</${tag}>`;
       }
     );
+  }
+
+  processTables(text) {
+    return text.replace(this.patterns.table, (table) => {
+      const rows = table.trim().split("\n");
+      const htmlRows = rows.map((row, index) => {
+        const cells = row.split("|").filter((cell) => cell.trim());
+        const tag = index === 0 ? "th" : "td";
+
+        return `<tr>${cells
+          .map((cell) => `<${tag}>${cell.trim()}</${tag}>`)
+          .join("")}</tr>`;
+      });
+
+      return `<table>${htmlRows.join("")}</table>`;
+    });
   }
 
   escapeHtml(text) {

@@ -1,4 +1,5 @@
-const Nanomark = require("nanomark");
+const fs = require("fs");
+const Nanomark = require("../src/main.js");
 const parser = new Nanomark();
 
 const markdown = `
@@ -21,14 +22,21 @@ code block
 \`\`\`
 
 [Link text](https://example.com)
+
+| Foo | Bar | Baz |
+| 1   | 2   | 3   |
+| 4   | 5   | 6   |
+| 7   | 8   | 9   |
 `;
 
 const numTests = 100000;
 const results = [];
 
+let finalHtml = "";
+
 for (let i = 0; i < numTests; i++) {
   const start = process.hrtime();
-  const html = parser.parse(markdown);
+  finalHtml = parser.parse(markdown);
   const end = process.hrtime(start);
   results.push(end[0] + end[1] / 1000000);
 }
@@ -42,3 +50,5 @@ console.log(`Best time: ${min}ms`);
 console.log(`Worst time: ${max}ms`);
 console.log(`Average time: ${avg}ms`);
 console.log(`Tests run: ${numTests}`);
+
+fs.writeFileSync("output.html", finalHtml);
