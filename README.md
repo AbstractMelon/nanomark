@@ -28,14 +28,15 @@ npm install nanomark
 ### CDN
 
 Add one of the following HTML script tags to your page:  
-@1.3.0
-```
-<script src="https://cdn.jsdelivr.net/npm/nanomark@1.3.0/src/main.js"></script>
+
+For the latest version you can use the following:
+```html
+<script src="https://cdn.jsdelivr.net/npm/nanomark@latest/src/main.js"></script>
 ```
 
-@latest
-```
-<script src="https://cdn.jsdelivr.net/npm/nanomark@latest/src/main.js"></script>
+For version 1.3.0 you can use the following:
+```html
+<script src="https://cdn.jsdelivr.net/npm/nanomark@1.3.0/src/main.js"></script>
 ```
 
 ## Usage
