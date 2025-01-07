@@ -1,9 +1,4 @@
-const Nanomark = require("nanomark");
-const marked = require("marked"); // Popular markdown library
-const showdown = require("showdown"); // Another popular markdown library
-const converter = new showdown.Converter();
-
-const parser = new Nanomark();
+const { fork } = require("child_process");
 
 const markdown = `
 # Hello World
@@ -27,33 +22,70 @@ code block
 [Link text](https://example.com)
 `;
 
-const numTests = 1000;
+const numTests = 10;
 
-function benchmark(parserFunction) {
-  const results = [];
-  for (let i = 0; i < numTests; i++) {
-    const start = process.hrtime();
-    parserFunction(markdown);
-    const end = process.hrtime(start);
-    results.push(end[0] + end[1] / 1000000);
-  }
+function runBenchmark(parserType) {
+  return new Promise(async (resolve) => {
+    const results = [];
 
-  const min = Math.min(...results);
-  const max = Math.max(...results);
-  const sum = results.reduce((acc, val) => acc + val, 0);
-  const avg = sum / results.length;
+    for (let i = 0; i < numTests; i++) {
+      const child = fork(__filename, [parserType]);
+      child.send({ markdown });
+      await new Promise((testResolve) => {
+        child.on("message", (result) => {
+          results.push(result.time);
+          testResolve();
+        });
+      });
+      child.kill();
+    }
 
-  console.log(`Best time: ${min}ms`);
-  console.log(`Worst time: ${max}ms`);
-  console.log(`Average time: ${avg}ms`);
-  console.log(`Tests run: ${numTests}`);
+    const min = Math.min(...results);
+    const max = Math.max(...results);
+    const avg = results.reduce((acc, val) => acc + val, 0) / results.length;
+
+    console.log(`${parserType}:`);
+    console.log(`Best time: ${min.toFixed(6)}ms`);
+    console.log(`Worst time: ${max.toFixed(6)}ms`);
+    console.log(`Average time: ${avg.toFixed(6)}ms`);
+    console.log(`Tests run: ${numTests}`);
+    resolve();
+  });
 }
 
-console.log("Nanomark:");
-benchmark((md) => parser.parse(md));
+if (process.argv.length > 2) {
+  const parserType = process.argv[2];
+  const parsers = {
+    Nanomark: () => {
+      const Nanomark = require("nanomark");
+      const parser = new Nanomark();
+      return (md) => parser.parse(md);
+    },
+    Marked: () => {
+      const marked = require("marked");
+      return (md) => marked.parse(md);
+    },
+    Showdown: () => {
+      const showdown = require("showdown");
+      const converter = new showdown.Converter();
+      return (md) => converter.makeHtml(md);
+    },
+  };
 
-console.log("Marked:");
-benchmark((md) => marked.parse(md));
+  const parserFunction = parsers[parserType]();
 
-console.log("Showdown:");
-benchmark((md) => converter.makeHtml(md));
+  const start = process.hrtime();
+  parserFunction(markdown);
+  const end = process.hrtime(start);
+  const time = end[0] * 1000 + end[1] / 1e6; // Convert to milliseconds
+
+  process.send({ time });
+  process.exit();
+} else {
+  (async () => {
+    await runBenchmark("Nanomark");
+    await runBenchmark("Marked");
+    await runBenchmark("Showdown");
+    console.log("Benchmarking complete.");
+  })();
+}
