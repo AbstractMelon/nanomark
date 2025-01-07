@@ -18,10 +18,18 @@
 
 ## Installation
 
+### NPM
 Install the package via npm:
 
 ```bash
 npm install nanomark
+```
+
+### CDN
+
+Add the following HTML to your page: 
+```
+<script src="https://cdn.jsdelivr.net/npm/nanomark@1.3.0/src/main.js"></script>
 ```
 
 ## Usage
