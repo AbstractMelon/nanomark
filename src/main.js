@@ -131,4 +131,6 @@ class Nanomark {
   }
 }
 
-module.exports = Nanomark;
+if(typeof(module)!="undefined"&&module?.exports){
+  module.exports = Nanomark;
+}
