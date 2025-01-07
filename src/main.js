@@ -11,6 +11,7 @@ class Nanomark {
       codeBlock: /```([\s\S]+?)```/g,
       paragraph: /^(?![-*+]|^\d+\.|>|#{1,6}\s|```)[^\n]+$/gm,
       table: /^(?:\|(.+?)\|(?:\n|$))+$/gm,
+      linebreak: / {2}$/mg
     };
   }
 
@@ -46,7 +47,8 @@ class Nanomark {
       )
       .replace(this.patterns.link, '<a href="$2">$1</a>')
       .replace(this.patterns.bold, "<strong>$1</strong>")
-      .replace(this.patterns.italic, "<em>$1</em>");
+      .replace(this.patterns.italic, "<em>$1</em>")
+      .replace(this.patterns.linebreak, "<br>");
 
     // Process lists (unordered and ordered)
     html = this.processLists(html);

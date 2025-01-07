@@ -21,7 +21,7 @@ This is a **bold** and *italic* text.
 code block
 \`\`\`
 
-[Link text](https://example.com)
+[Link text](https://example.com)  
 [Header link text](#hello-world)  
 
 | Foo | Bar | Baz |
