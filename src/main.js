@@ -18,7 +18,7 @@ class Nanomark {
  * Parses the given markdown string into HTML.
  * @param {string} markdown The markdown content to parse.
  * @param {Object} config The configuration options.
- * @param {boolean} [config.header_ids] Adds ID attributes to header elements. Converts headers to kebab-case
+ * @param {boolean} [config.header_ids] Adds ID attributes to header elements. Converts headers to kebab-case. (Experimental)
  * @returns {string} The HTML output of the parsed markdown.
  */
   parse(markdown, config) {
@@ -36,7 +36,9 @@ class Nanomark {
       .replace(this.patterns.code, (_, code) => `<code>${code}</code>`)
       .replace(this.patterns.heading, (_, hashes, content) => {
         const level = hashes.length;
-        return `<h${level}>${content.trim()}</h${level}>`;
+        const trimmed = content.trim()
+        const assignedId = config?.header_ids?this.kebabCase(trimmed):""
+        return `<h${level} id="${assignedId}">${trimmed}</h${level}>`;
       })
       .replace(
         this.patterns.blockquote,
@@ -117,6 +119,13 @@ class Nanomark {
       "'": "&#39;",
     };
     return text.replace(/[&<>"']/g, (char) => htmlEntities[char]);
+  }
+
+  kebabCase(string){
+    return string
+      .replace(/([a-z])([A-Z])/g, "$1-$2")
+      .replace(/[\s_]+/g, '-')
+      .toLowerCase();
   }
 }
 

@@ -22,6 +22,7 @@ code block
 \`\`\`
 
 [Link text](https://example.com)
+[Header link text](#hello-world)  
 
 | Foo | Bar | Baz |
 | 1   | 2   | 3   |
@@ -35,7 +36,9 @@ const results = [];
 let finalHtml = "";
 
 const start = process.hrtime();
-finalHtml = parser.parse(markdown);
+finalHtml = parser.parse(markdown, {
+  header_ids: true
+});
 const end = process.hrtime(start);
 let time = end[0] + end[1] / 1000000
 
