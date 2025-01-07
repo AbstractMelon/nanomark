@@ -14,7 +14,14 @@ class Nanomark {
     };
   }
 
-  parse(markdown) {
+  /**
+ * Parses the given markdown string into HTML.
+ * @param {string} markdown The markdown content to parse.
+ * @param {Object} config The configuration options.
+ * @param {boolean} [config.header_ids] Adds ID attributes to header elements. Converts headers to kebab-case
+ * @returns {string} The HTML output of the parsed markdown.
+ */
+  parse(markdown, config) {
     let html = markdown.replace(/\r\n/g, "\n");
 
     // Escape HTML once at the start to prevent injection
