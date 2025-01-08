@@ -23,7 +23,8 @@
     "lib": "src"
   },
   "scripts": {
-    "test": "node tests/test.js"
+    "test": "node tests/test.js",
+    "docs": "node ./web/build.js"
   },
   "files": [
     "src/**/*"
