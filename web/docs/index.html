@@ -1,15 +1,15 @@
 <link rel="stylesheet" href="test-style.css" />
-<h1 id="">Nanomark</h1>
+<h1 id="nanomark">Nanomark</h1>
 <strong>Nanomark</strong> is a super-fast, lightweight Markdown-to-HTML parser. It supports common Markdown features and is designed for speed and simplicity.
 <p>!<a href="./assets/performance-chart.png">Performance Chart</a></p>
-<h2 id="">Features</h2>
+<h2 id="features">Features</h2>
 <ul><li><strong>Headings</strong>: Convert <code># Heading</code> to <code>&lt;h1&gt;Heading&lt;/h1&gt;</code>.</li></ul><ul><li><strong>Bold and Italic</strong>: Transform <code><strong>bold</strong></code> and <code><em>italic</em></code> to <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code>.</li></ul><ul><li><strong>Links</strong>: Parse <code><a href="https://example.com">Link text</a></code> to <code>&lt;a href=&quot;https://example.com&quot;&gt;Link text&lt;/a&gt;</code>.</li></ul><ul><li><strong>Lists</strong>: Support for ordered (<code>1. Item</code>) and unordered (<code>- Item</code>) lists.</li></ul><ul><li><strong>Blockquotes</strong>: Render <code>&gt; Blockquote</code> as <code>&lt;blockquote&gt;Blockquote&lt;/blockquote&gt;</code>.</li></ul><ul><li><strong>Inline Code</strong>: Convert `<code> </code>code<code> </code><code> to </code>&lt;code&gt;code&lt;/code&gt;<code>.</li></ul><ul><li><strong>Code Blocks</strong>: Parse multi-line code blocks into </code>&lt;pre&gt;&lt;code&gt;<code> elements.</li></ul><ul><li><strong>Paragraphs</strong>: Automatically wrap plain text in </code>&lt;p&gt;<code> tags.</li></ul><ul><li><strong>Escaping</strong>: Prevents HTML injection by escaping special characters.</li></ul>
-<h2 id="">Installation</h2>
-<h3 id="">NPM</h3>
+<h2 id="installation">Installation</h2>
+<h3 id="npm">NPM</h3>
 <p>Install the package via npm:</p>
 <pre><code>bash
 <p>npm install nanomark</code></pre></p>
-<h3 id="">CDN</h3>
+<h3 id="cdn">CDN</h3>
 <p>Add one of the following HTML script tags to your page:<br></p>
 <p>For the latest version you can use the following:</p>
 <pre><code>html
@@ -17,13 +17,13 @@
 <p>For version 1.3.0 you can use the following:</p>
 <pre><code>html
 <p>&lt;script src=&quot;https://cdn.jsdelivr.net/npm/nanomark@1.3.0/src/main.js&quot;&gt;&lt;/script&gt;</code></pre></p>
-<h2 id="">Usage</h2>
+<h2 id="usage">Usage</h2>
 <p>Here&#39;s how you can use </code>Nanomark<code> to parse Markdown into HTML:</p>
 <pre><code>javascript
 <p>const Nanomark = require(&quot;nanomark&quot;);</p>
 <p>const parser = new Nanomark();</p>
 <p>const markdown = </code></p>
-<h1 id="">Hello World</h1>
+<h1 id="helloworld">Hello World</h1>
 <p>This is a <strong>bold</strong> and <em>italic</em> text.</p>
 <ul><li>List item 1</li></ul><ul><li>List item 2</li></ul><ol><li>1. Ordered item 1</li></ol><ol><li>2. Ordered item 2</li></ol>
 <p>&gt; This is a blockquote</p>
@@ -36,7 +36,7 @@
 <code>;
 <p>const html = parser.parse(markdown);</p>
 <p>console.log(html);</code></pre></p>
-<h3 id="">Output</h3>
+<h3 id="output">Output</h3>
 <pre><code>html
 <p>&lt;h1&gt;Hello World&lt;/h1&gt;</p>
 <p>&lt;p&gt;This is a &lt;strong&gt;bold&lt;/strong&gt; and &lt;em&gt;italic&lt;/em&gt; text.&lt;/p&gt;</p>
@@ -52,17 +52,17 @@
 <p>&lt;code&gt;inline code&lt;/code&gt;</p>
 <p>&lt;pre&gt;&lt;code&gt;code block&lt;/code&gt;&lt;/pre&gt;</p>
 <p>&lt;a href=&quot;https://example.com&quot;&gt;Link text&lt;/a&gt;</code></pre></p>
-<h2 id="">Documentation</h2>
-<h3 id="">The </code>Nanomark<code> Class</h3>
-<h4 id=""></code>new Nanomark()<code></h4>
+<h2 id="documentation">Documentation</h2>
+<h3 id="thecodenanomarkcodeclass">The </code>Nanomark<code> Class</h3>
+<h4 id="codenewnanomarkcode"></code>new Nanomark()<code></h4>
 <p>Create a new </code>Nanomark<code> parser.</p>
-<h4 id=""></code>parse(markdown: string): string<code></h4>
+<h4 id="codeparsemarkdownstringstringcode"></code>parse(markdown: string): string<code></h4>
 <p>Convert a Markdown string to HTML.</p>
 <ul><li><strong></code>markdown`</strong>: The Markdown string to parse.</li></ul><ul><li><strong>Returns</strong>: The HTML string.</li></ul>
-<h2 id="">Performance</h2>
+<h2 id="performance">Performance</h2>
 <p>Nanomark pre-compiles regex patterns for peak parsing speed.</p>
-<h2 id="">License</h2>
+<h2 id="license">License</h2>
 <p>This project is licensed under the MIT License. See the <a href="./LICENSE">LICENSE</a> file for details.</p>
-<h2 id="">Contributing</h2>
+<h2 id="contributing">Contributing</h2>
 <p>Contributions are welcome! Please submit issues or pull requests to improve this project.</p>
 <p>Happy coding with <strong>Nanomark</strong>!</p>
