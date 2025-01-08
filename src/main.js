@@ -46,7 +46,10 @@ class Nanomark {
         this.patterns.blockquote,
         (_, content) => `<blockquote>${content.trim()}</blockquote>`
       )
-      .replace(this.patterns.link, '<a href="$2">$1</a>')
+      .replace(this.patterns.link, (_, text, link) => {
+        
+        return `<a href="${link}">${text}</a>`
+      })
       .replace(this.patterns.bold, "<strong>$1</strong>")
       .replace(this.patterns.italic, "<em>$1</em>")
       .replace(this.patterns.linebreak, "<br>");
