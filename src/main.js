@@ -30,6 +30,7 @@ class Nanomark {
 
     // Process elements in a logical order to minimize interference
     html = html
+      // TODO: Yeah this has a massive issue where the stuff in codeblocks are still parsed. Potentially creates XSS vulnerabilities.
       .replace(
         this.patterns.codeBlock,
         (_, code) => `<pre><code>${code.trim()}</code></pre>`
